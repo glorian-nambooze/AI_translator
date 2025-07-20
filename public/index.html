@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Translator</title>
+    <link rel="stylesheet" href="Robert.css">
+</head>
+
+<body>
+    <h2>Language Translator</h2>
+
+    <div class="container">
+        <div class="translator-box">
+            <div class="language-selector">
+                <label for="source-lang">From:</label>
+                <select id="source-lang"></select>
+
+                <label for="target-lang">To:</label>
+                <select id="target-lang"></select>
+            </div>
+
+            <div class="text-areas">
+                <textarea id="source-text" placeholder="Enter text to translate"></textarea>
+                <textarea id="target-text" placeholder="Translation will appear here..." readonly></textarea>
+            </div>
+
+            <button id="translate-button">Translate</button>
+        </div>
+    </div>
+
+    <script src="Ackileo.js"></script>
+</body>
+
+</html>
