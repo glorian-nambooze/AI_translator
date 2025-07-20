@@ -5,12 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const sourceText = document.getElementById("source-text");
     const targetText = document.getElementById("target-text");
 
-    // Load available languages from your Node.js backend
+    // Load available languages from your deployed Node.js backend on Render
     async function loadLanguages() {
         try {
-            const response = await fetch("https://your-backend-service.onrender.com/languages");
+            // UPDATED: Use your Render backend URL here instead of localhost
+            const response = await fetch("https://ai-translator-techiesprouters.onrender.com/languages");
 
+            // Old local fetch (commented out)
             // const response = await fetch("http://localhost:3000/languages");
+
             const languages = await response.json();
 
             languages.forEach(lang => {
@@ -38,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     loadLanguages();
 
-    // Translate text
+    // Translate text when button clicked
     translateButton.addEventListener("click", async () => {
         const source = sourceLangSelect.value;
         const target = targetLangSelect.value;
@@ -50,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("http://localhost:3000/translate", {
+            // UPDATED: Use your Render backend URL here instead of localhost
+            const response = await fetch("https://ai-translator-techiesprouters.onrender.com/translate", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
