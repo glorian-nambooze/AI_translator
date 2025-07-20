@@ -22,24 +22,33 @@ app.get('/languages', async (req, res) => {
     }
 });
 
+
+
 app.post('/translate', async (req, res) => {
     try {
         const { q, source, target } = req.body;
+        console.log("Translate request:", { q, source, target });
+
         const response = await fetch(`${LIBRETRANSLATE_API}/translate`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ q, source, target, format: 'text' }),
         });
+
+        console.log("Raw response status:", response.status);
         const data = await response.json();
+        console.log("Parsed response data:", data);
 
-        // Send only the translated text back to frontend
+        if (!data.translatedText) {
+            return res.status(500).json({ error: "No translatedText in API response" });
+        }
+
         res.json({ translatedText: data.translatedText });
-
     } catch (err) {
+        console.error("Translate error:", err);
         res.status(500).json({ error: 'Error translating text' });
     }
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
