@@ -31,11 +31,15 @@ app.post('/translate', async (req, res) => {
             body: JSON.stringify({ q, source, target, format: 'text' }),
         });
         const data = await response.json();
-        res.json(data);
+
+        // Send only the translated text back to frontend
+        res.json({ translatedText: data.translatedText });
+
     } catch (err) {
         res.status(500).json({ error: 'Error translating text' });
     }
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
